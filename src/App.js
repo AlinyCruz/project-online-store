@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Search from './components/Search';
+import ShoppingCard from './pages/ShoppingCard';
 
 function App() {
   return (
@@ -12,6 +13,10 @@ function App() {
             exact
             path="/"
             component={ Search }
+          />
+          <Route
+            path="/shoppingcard"
+            component={ ShoppingCard }
           />
         </Switch>
       </BrowserRouter>
