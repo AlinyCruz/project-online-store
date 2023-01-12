@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../services/api';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Search extends Component {
   state = {
     categorias: [],
     produtos: '',
-    tiposProdutos: [],
-    invalido: false,
+    listaProdutos: [],
   };
 
   componentDidMount() {
@@ -24,22 +22,22 @@ export default class Search extends Component {
 
   ativandobotao = async () => {
     const { produtos } = this.state;
-    const tiposProdutos = await getProductsFromCategoryAndQuery(null, produtos);
-    if (tiposProdutos.results.length === 0) {
+    const todosProdutos = await getProductsFromCategoryAndQuery(null, produtos);
+    console.log(todosProdutos);
+    if (todosProdutos.length === 0) {
       this.setState({
-        invalido: true,
+        listaProdutos: false,
       });
     } else {
       this.setState({
-        tiposProdutos,
-        invalido: false,
+        listaProdutos: todosProdutos,
       });
     }
   };
 
   render() {
-    const { categorias, tiposProdutos } = this.state;
-    // console.log(tiposProdutos);
+    const { categorias, listaProdutos } = this.state;
+    // console.log(listaProdutos);
     return (
       <>
         <input
@@ -57,11 +55,22 @@ export default class Search extends Component {
           Buscar
         </button>
         <section>
-          { tiposProdutos.map((produto) => (
-          <p key={ produto.results }>
-
-          </p> 
-          )) }
+          <ul>
+            { listaProdutos.map((produto) => (
+              <div
+                key={ produto.id }
+                data-testid="product"
+              >
+                <h3>{ produto.title }</h3>
+                <img src={ produto.thumbnail } alt={ produto.title } />
+                <p>
+                  {' '}
+                  { produto.price }
+                  {' '}
+                </p>
+              </div>
+            )) }
+          </ul>
         </section>
         <h3 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
