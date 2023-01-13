@@ -56,7 +56,7 @@ export default class Search extends Component {
         </button>
         <section>
           <ul>
-            { listaProdutos.map((produto) => (
+            { listaProdutos.length > 0 ? listaProdutos.map((produto) => (
               <div
                 key={ produto.id }
                 data-testid="product"
@@ -69,7 +69,7 @@ export default class Search extends Component {
                   {' '}
                 </p>
               </div>
-            )) }
+            )) : <p>Nenhum produto foi encontrado</p>}
           </ul>
         </section>
         <h3 data-testid="home-initial-message">
