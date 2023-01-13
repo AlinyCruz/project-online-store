@@ -30,7 +30,7 @@ export default class Search extends Component {
       });
     } else {
       this.setState({
-        listaProdutos: todosProdutos,
+        listaProdutos: todosProdutos.results,
       });
     }
   };
