@@ -23,9 +23,9 @@ export default class Home extends Component {
     });
   };
 
-  ativandoBotao = async () => {
+  ativandoBotao = async (id) => {
     const { produtos } = this.state;
-    const todosProdutos = await getProductsFromCategoryAndQuery(null, produtos);
+    const todosProdutos = await getProductsFromCategoryAndQuery(id, produtos);
     console.log(todosProdutos);
     if (todosProdutos.length === 0) {
       this.setState({
@@ -64,7 +64,7 @@ export default class Home extends Component {
         >
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
-        <Category categorias={ categorias } />
+        <Category categorias={ categorias } ativandoBotao={ this.ativandoBotao } />
       </>
     );
   }

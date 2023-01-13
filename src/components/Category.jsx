@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 export default class Category extends Component {
   render() {
-    const { categorias } = this.props;
+    const { categorias, ativandoBotao } = this.props;
     return (
       <ul>
         { categorias.map((categoria) => (
@@ -11,6 +11,7 @@ export default class Category extends Component {
             <button
               data-testid="category"
               type="button"
+              onClick={ () => ativandoBotao(categoria.id) }
             >
               { categoria.name }
             </button>
@@ -23,5 +24,5 @@ export default class Category extends Component {
 // Verificar esta props
 Category.propTypes = {
   categorias: PropTypes.shape([]).isRequired,
-// map: PropTypes.func,
+  ativandoBotao: PropTypes.func.isRequired,
 };
