@@ -2,8 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export default class Card extends Component {
+  // função do requisito 8
+  adicionarCarrinho = (produto) => {
+    const carrinho = JSON.parse(localStorage.getItem('card') || '[]');
+    localStorage.setItem('card', JSON.stringify([...carrinho, produto]));
+  };
+
   render() {
-    const { listaProdutos } = this.props;
+    const { listaProdutos /* ativandoBotao */ } = this.props;
     return (
       <section>
         <ul>
@@ -15,13 +21,16 @@ export default class Card extends Component {
               <h3>{ produto.title }</h3>
               <img src={ produto.thumbnail } alt={ produto.title } />
               <p>
-                {' '}
                 { produto.price }
-                {' '}
               </p>
               <div>
-                <button type="button">Adicionar ao carrinho</button>
-                <button type="button">Remover do carrinho</button>
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  onClick={ () => this.adicionarCarrinho(produto) } // parte do requisito 8
+                >
+                  Adicionar ao carrinho
+                </button>
               </div>
             </div>
           )) : <p>Nenhum produto foi encontrado</p>}
@@ -33,4 +42,5 @@ export default class Card extends Component {
 
 Card.propTypes = {
   listaProdutos: PropTypes.string.isRequired,
+  /* ativandoBotao: PropTypes.func.isRequired, */
 };
