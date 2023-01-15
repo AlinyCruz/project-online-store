@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 export default class Card extends Component {
   render() {
     const { listaProdutos } = this.props;
+    const { carrinho } = this.state;
     return (
       <section>
         <ul>
@@ -19,6 +20,10 @@ export default class Card extends Component {
                 { produto.price }
                 {' '}
               </p>
+              <div>
+                <button type="button">Adicionar ao carrinho</button>
+                <button type="button">Remover do carrinho</button>
+              </div>
             </div>
           )) : <p>Nenhum produto foi encontrado</p>}
         </ul>
