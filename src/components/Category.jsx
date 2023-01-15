@@ -26,6 +26,6 @@ export default class Category extends Component {
 
 // Verificar esta props
 Category.propTypes = {
-  /* categorias: PropTypes.shape([]).isRequired, */
+  categorias: PropTypes.shape([]).isRequired,
   ativandoBotao: PropTypes.func.isRequired,
 };

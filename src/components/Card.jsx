@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 export default class Card extends Component {
   render() {
     const { listaProdutos } = this.props;
-    const { carrinho } = this.state;
     return (
       <section>
         <ul>
