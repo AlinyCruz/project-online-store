@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import Card from '../components/Card';
 import Category from '../components/Category';
 import InputButton from '../components/InputButton';
+import Cart from '../components/Cart';
 
 export default class Home extends Component {
   state = {
@@ -57,7 +57,7 @@ export default class Home extends Component {
         />
         {/*  // Props Card renderizada */}
         { listaProdutos
-          ? <Card listaProdutos={ listaProdutos } />
+          ? <Cart listaProdutos={ listaProdutos } />
           : (
             <h3 data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
@@ -66,7 +66,7 @@ export default class Home extends Component {
         {/*   Link e button criado para redirecionar para a página do shopping card do requisito 3 */}
         <Link
           data-testid="shopping-cart-empty-message"
-          to="/shoppingcard"
+          to="/shoppingcart"
         >
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>

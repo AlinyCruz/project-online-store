@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class ShoppingCard extends Component {
+export default class ShoppingCart extends Component {
   state = {
     carrinho: [],
   };
@@ -10,7 +10,7 @@ export default class ShoppingCard extends Component {
   }
 
   carrinhoAdicionar = () => {
-    const carrinho = JSON.parse(localStorage.getItem('card') || '[]');
+    const carrinho = JSON.parse(localStorage.getItem('cart') || '[]');
     this.setState({
       carrinho,
     });
@@ -18,6 +18,7 @@ export default class ShoppingCard extends Component {
 
   render() {
     const { carrinho } = this.state;
+    console.log(carrinho);
     return (
       // Página do carrinho de compras criada no requisito 3, onde exibe a mensagem carrinho vazio. Em Home foi criado um link que direciona para essa página
       <div>
