@@ -49,6 +49,7 @@ export default class Home extends Component {
     const { categorias, listaProdutos } = this.state;
     return (
       <>
+        <h1>Project Frontend Online Store</h1>
         {/*  // Props InputButton renderizada */}
         <InputButton
           handleChange={ this.handleChange }
