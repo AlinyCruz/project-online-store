@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Search from './components/Search';
+import Home from './pages/Home';
 import ShoppingCard from './pages/ShoppingCard';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
           <Route
             exact
             path="/"
-            component={ Search }
+            component={ Home }
           />
           <Route
             path="/shoppingcard"
