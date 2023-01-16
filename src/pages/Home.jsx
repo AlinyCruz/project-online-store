@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import Card from '../components/Cart';
+import Cart from '../components/Cart';
 import Category from '../components/Category';
 import InputButton from '../components/InputButton';
 
@@ -57,7 +57,7 @@ export default class Home extends Component {
         />
         {/*  // Props Card renderizada */}
         { listaProdutos
-          ? <Card listaProdutos={ listaProdutos } />
+          ? <Cart listaProdutos={ listaProdutos } />
           : (
             <h3 data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.

@@ -9,11 +9,12 @@ export default class Cart extends Component {
     localStorage.setItem('cart', JSON.stringify([...carrinho, produto]));
   };
 
-  toTakeId = (price, title, thumbnail) => {
+  toTakeId = (price, title, thumbnail, id) => {
     const infos = {
       price,
       title,
       thumbnail,
+      id,
     };
     localStorage.setItem('detailsId', JSON.stringify(infos));
   };
@@ -24,36 +25,37 @@ export default class Cart extends Component {
       <section>
         <ul>
           { listaProdutos.length > 0 ? listaProdutos.map((produto) => (
-            <Link
-              key={ produto.id }
-              to="/details"
-              data-testid="product-detail-link"
-              onClick={ () => this.toTakeId(
-                produto.price,
-                produto.title,
-                produto.thumbnail,
-              ) }
-            >
-              <div
-                key={ produto.id }
-                data-testid="product"
+            <div key={ produto.id }>
+              <Link
+                to="/details"
+                data-testid="product-detail-link"
+                onClick={ () => this.toTakeId(
+                  produto.price,
+                  produto.title,
+                  produto.thumbnail,
+                  produto.id,
+                ) }
               >
-                <h3>{ produto.title }</h3>
-                <img src={ produto.thumbnail } alt={ produto.title } />
-                <p>
-                  { produto.price }
-                </p>
-                <div>
-                  <button
-                    type="button"
-                    data-testid="product-add-to-cart"
-                    onClick={ () => this.adicionarCarrinho(produto) }
-                  >
-                    Adicionar ao carrinho
-                  </button>
+                <div
+                  key={ produto.id }
+                  data-testid="product"
+                >
+                  <h3>{ produto.title }</h3>
+                  <img src={ produto.thumbnail } alt={ produto.title } />
+                  <p>
+                    { produto.price }
+                  </p>
+                  <div />
                 </div>
-              </div>
-            </Link>
+              </Link>
+              <button
+                type="button"
+                data-testid="product-add-to-cart"
+                onClick={ () => this.adicionarCarrinho(produto) }
+              >
+                Adicionar ao carrinho
+              </button>
+            </div>
           )) : <p>Nenhum produto foi encontrado</p>}
         </ul>
       </section>
