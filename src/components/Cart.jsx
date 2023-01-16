@@ -9,8 +9,13 @@ export default class Cart extends Component {
     localStorage.setItem('cart', JSON.stringify([...carrinho, produto]));
   };
 
-  toTakeId = (id) => {
-    localStorage.setItem('detailsId', JSON.stringify(id));
+  toTakeId = (price, title, thumbnail) => {
+    const infos = {
+      price,
+      title,
+      thumbnail,
+    };
+    localStorage.setItem('detailsId', JSON.stringify(infos));
   };
 
   render() {
@@ -23,7 +28,11 @@ export default class Cart extends Component {
               key={ produto.id }
               to="/details"
               data-testid="product-detail-link"
-              onClick={ () => this.toTakeId(produto.id) }
+              onClick={ () => this.toTakeId(
+                produto.price,
+                produto.title,
+                produto.thumbnail,
+              ) }
             >
               <div
                 key={ produto.id }

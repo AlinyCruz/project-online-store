@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getProductById } from '../services/api';
+/* import { getProductById } from '../services/api'; */
 
 export default class Details extends Component {
   state = {
     productId: {},
   };
 
-  async componentDidMount() {
+  /* componentDidMount() {
+    this.teste();
+  }
+
+  teste = async () => {
     const id = JSON.parse(localStorage.getItem('detailsId'));
     const details = await getProductById(id);
     this.setState({
       productId: details,
+    });
+  }; */
+
+  async componentDidMount() {
+    const infos = JSON.parse(localStorage.getItem('detailsId'));
+    this.setState({
+      productId: infos,
     });
   }
 
