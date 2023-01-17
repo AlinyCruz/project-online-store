@@ -16,8 +16,27 @@ export default class Details extends Component {
 
   addCarrinho = (productId) => {
     // const { productId } = this.state;
+    const { price, title, thumbnail, id } = productId;
     const carrinho = JSON.parse(localStorage.getItem('cart') || '[]');
-    localStorage.setItem('cart', JSON.stringify([...carrinho, productId]));
+    let produtosFiltrados = [];
+    const itens = carrinho.some((item) => produto.id === item.id);
+    if (!itens) {
+      produtosFiltrados = [...carrinho, { quantidade: 1,
+        price,
+        title,
+        thumbnail,
+        id }];
+    } else {
+      produtosFiltrados = carrinho.map((elemento) => {
+        if (elemento.id === produto.id) {
+          return {
+            ...elemento, quantidade: elemento.quantidade + 1,
+          };
+        }
+        return elemento;
+      });
+    }
+    localStorage.setItem('cart', JSON.stringify(produtosFiltrados));
   };
 
   render() {
