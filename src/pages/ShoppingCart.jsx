@@ -16,6 +16,24 @@ export default class ShoppingCart extends Component {
     });
   };
 
+  atualizaQuantia = (productId, bolleano) => {
+    // const { productId } = this.state;
+    let carrinho = JSON.parse(localStorage.getItem('cart') || '[]');
+    const itens = carrinho.find((item) => productId === item.id);
+    if (bolleano === 'remover') {
+      carrinho = carrinho.filter((item) => item.id !== productId);
+    }
+    if (bolleano) {
+      itens.quantidade += 1;
+    } else if (itens.quantidade > 1) {
+      itens.quantidade -= 1;
+    }
+    this.setState({
+      carrinho,
+    });
+    localStorage.setItem('cart', JSON.stringify(carrinho));
+  };
+
   render() {
     const { carrinho } = this.state;
     console.log(carrinho);
@@ -34,7 +52,28 @@ export default class ShoppingCart extends Component {
                 { carrinhos.title }
               </p>
               <p>{ carrinhos.price }</p>
-              <p data-testid="shopping-cart-product-quantity">1</p>
+              <p data-testid="shopping-cart-product-quantity">{ carrinhos.quantidade }</p>
+              <button
+                data-testid="product-increase-quantity"
+                onClick={ () => this.atualizaQuantia(carrinhos.id, true) }
+                type="button"
+              >
+                +
+              </button>
+              <button
+                data-testid="product-decrease-quantity"
+                onClick={ () => this.atualizaQuantia(carrinhos.id, false) }
+                type="button"
+              >
+                -
+              </button>
+              <button
+                data-testid="remove-product"
+                onClick={ () => this.atualizaQuantia(carrinhos.id, 'remover') }
+                type="button"
+              >
+                Remover
+              </button>
             </div>))) }
       </div>
     );

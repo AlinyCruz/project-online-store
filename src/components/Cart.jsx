@@ -5,8 +5,28 @@ import { Link } from 'react-router-dom';
 export default class Cart extends Component {
   // função do requisito 8
   adicionarCarrinho = (produto) => {
+    console.log(produto);
+    const { price, title, thumbnail, id } = produto;
     const carrinho = JSON.parse(localStorage.getItem('cart') || '[]');
-    localStorage.setItem('cart', JSON.stringify([...carrinho, produto]));
+    let produtosFiltrados = [];
+    const itens = carrinho.some((item) => produto.id === item.id);
+    if (!itens) {
+      produtosFiltrados = [...carrinho, { quantidade: 1,
+        price,
+        title,
+        thumbnail,
+        id }];
+    } else {
+      produtosFiltrados = carrinho.map((elemento) => {
+        if (elemento.id === produto.id) {
+          return {
+            ...elemento, quantidade: elemento.quantidade + 1,
+          };
+        }
+        return elemento;
+      });
+    }
+    localStorage.setItem('cart', JSON.stringify(produtosFiltrados));
   };
 
   toTakeId = (price, title, thumbnail, id) => {
